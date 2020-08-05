@@ -1,0 +1,8 @@
+{
+  "username": "dade.murphy@example.com",
+  "password": "correcthorsebatterystaple",
+  "options":  {
+    "multiOptionalFactorEnroll": false,
+    "warnBeforePasswordExpired": false
+  }
+}

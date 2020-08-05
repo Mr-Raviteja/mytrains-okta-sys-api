@@ -1,0 +1,11 @@
+{
+  "profile": {
+    "firstName": "sunny",
+    "lastName": "Brock",
+    "email": "sunny@gmail.com",
+    "login": "sunny@gmail.com"
+  },
+  "credentials": {
+    "password" : { "value": "Raviteja@27" }
+  }
+}

@@ -1,0 +1,119 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<types:mule xmlns:types="http://www.mulesoft.org/schema/mule/types">
+  <types:catalog>
+    <types:type name="userExample" format="json">
+      <types:shape format="weave" example="examples/userExampleBT.json"><![CDATA[%dw 2.0
+
+type userExample = {|
+  firstName: String, 
+  lastName: String, 
+  email: String, 
+  login: String, 
+  password: String
+|} {"example": "{\\\"firstName\\\":\\\"raviteja\\\",\\\"lastName\\\":\\\"Madishetty\\\",\\\"email\\\":\\\"madishettyraviteja@gmail.com\\\",\\\"login\\\":\\\"madishettyraviteja@gmail.com\\\",\\\"password\\\":\\\"sjdhi1234\\\"}"}
+
+]]></types:shape>
+    </types:type>
+    <types:type name="userOktaExample" format="json">
+      <types:shape format="weave" example="examples/userOktaExample.json"><![CDATA[%dw 2.0
+
+type userOktaExample = {|
+  profile: {|
+    firstName: String, 
+    lastName: String, 
+    email: String, 
+    login: String
+  |}, 
+  credentials: {| password: {| value: String |} |}
+|} {"example": "{\\\"profile\\\":{\\\"firstName\\\":\\\"sunny\\\",\\\"lastName\\\":\\\"Brock\\\",\\\"email\\\":\\\"sunny@gmail.com\\\",\\\"login\\\":\\\"sunny@gmail.com\\\"},\\\"credentials\\\":{\\\"password\\\":{\\\"value\\\":\\\"Raviteja@27\\\"}}}"}
+
+]]></types:shape>
+    </types:type>
+    <types:type name="authExample" format="json">
+      <types:shape format="weave" example="examples/autheExamle.json"><![CDATA[%dw 2.0
+
+type authExample = {|
+  login: String, 
+  password: String
+|} {"example": "{\\\"login\\\":\\\"madishetty@gmail.com\\\",\\\"password\\\":\\\"dgajgdk225@\\\"}"}
+
+]]></types:shape>
+    </types:type>
+    <types:type name="actualAuth" format="json">
+      <types:shape format="weave" example="examples/actualAuth.json"><![CDATA[%dw 2.0
+
+type actualAuth = {|
+  username: String, 
+  password: String, 
+  options: {|
+    multiOptionalFactorEnroll: Boolean, 
+    warnBeforePasswordExpired: Boolean
+  |}
+|} {"example": "{\\\"username\\\":\\\"dade.murphy@example.com\\\",\\\"password\\\":\\\"correcthorsebatterystaple\\\",\\\"options\\\":{\\\"multiOptionalFactorEnroll\\\":false,\\\"warnBeforePasswordExpired\\\":false}}"}
+
+]]></types:shape>
+    </types:type>
+    <types:type name="changePwd" format="json">
+      <types:shape format="weave" example="examples/changepassword.json"><![CDATA[%dw 2.0
+
+type changePwd = {|
+  oldPassword: String, 
+  newPassword: String
+|} {"example": "{\\\"oldPassword\\\":\\\"sunny@143\\\",\\\"newPassword\\\":\\\"ravi@143\\\"}"}
+
+]]></types:shape>
+    </types:type>
+    <types:type name="actualChangePass" format="json">
+      <types:shape format="weave" example="examples/ActualchangePassword.json"><![CDATA[%dw 2.0
+
+type actualChangePass = {|
+  oldPassword: {| value: String |}, 
+  newPassword: {| value: String |}
+|} {"example": "{\\\"oldPassword\\\":{\\\"value\\\":\\\"{{password}}\\\"},\\\"newPassword\\\":{\\\"value\\\":\\\"uTVM,TPw55\\\"}}"}
+
+]]></types:shape>
+    </types:type>
+  </types:catalog>
+  <types:enrichment select="#d7fb69c5-48cc-44e8-8372-051701fe4706">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="userExample"/>
+        </types:message>
+      </types:input-event>
+      <types:output-event>
+        <types:message>
+          <types:payload type="userOktaExample"/>
+        </types:message>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#29c77a98-5e6a-4e94-8742-2d29d4c54a74">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="authExample"/>
+        </types:message>
+      </types:input-event>
+      <types:output-event>
+        <types:message>
+          <types:payload type="actualAuth"/>
+        </types:message>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#af366aec-793a-4651-ba3f-0881408c3d61">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="changePwd"/>
+        </types:message>
+      </types:input-event>
+      <types:output-event>
+        <types:message>
+          <types:payload type="actualChangePass"/>
+        </types:message>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+</types:mule>
