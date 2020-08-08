@@ -29,7 +29,7 @@ output application/json
 }]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
-		<http:request method="POST" doc:name="Request" doc:id="20a4231a-2f62-46a3-a26e-0af6796e2cee" config-ref="HTTP_Request_configuration" path="/users?activate=true">
+		<http:request method="POST" doc:name="Request" doc:id="20a4231a-2f62-46a3-a26e-0af6796e2cee" config-ref="HTTP_Request_configuration" path="/users?activate=true" responseTimeout="50000">
 			<http:headers ><![CDATA[#[output application/java
 ---
 {
@@ -39,7 +39,7 @@ output application/json
 		<logger level="INFO" doc:name="Logger" doc:id="5a932624-6076-4d00-b1e5-834f9463f184" message="#[payload]"/>
 	</flow>
 	<flow name="trains-users-okta-api-getAllUsers" doc:id="0a86934c-0e95-40be-9b35-4491cbe463fe" >
-		<http:request method="GET" doc:name="Request" doc:id="ce24ed1e-b1f5-4585-8d33-34c58ad3095a" config-ref="HTTP_Request_configuration" path="/users" >
+		<http:request method="GET" doc:name="Request" doc:id="ce24ed1e-b1f5-4585-8d33-34c58ad3095a" config-ref="HTTP_Request_configuration" path="/users" responseTimeout="50000">
 			<http:headers ><![CDATA[#[output application/java
 ---
 {
@@ -49,7 +49,7 @@ output application/json
 		<logger level="INFO" doc:name="Logger" doc:id="55621a46-d985-4ea7-9474-a3c1f56c5775" message="#[payload]" />
 	</flow>
 	<flow name="trains-users-okta-api-activateUser" doc:id="8153e05b-4797-45dc-be5e-b33660b28cbf" >
-		<http:request method="POST" doc:name="Request" doc:id="61703922-6ff2-40b9-b122-760c36cc249e" config-ref="HTTP_Request_configuration" path="/users/{userId}/lifecycle/activate" >
+		<http:request method="POST" doc:name="Request" doc:id="61703922-6ff2-40b9-b122-760c36cc249e" config-ref="HTTP_Request_configuration" path="/users/{userId}/lifecycle/activate" responseTimeout="50000">
 			<http:headers ><![CDATA[#[output application/java
 ---
 {
@@ -69,7 +69,7 @@ output application/json
 		<logger level="INFO" doc:name="Logger" doc:id="873b0541-e3ca-46f3-83e6-86af7af4fa81" message="#[payload]" />
 	</flow>
 	<flow name="trains-users-okta-api-getUser" doc:id="96caebcf-75a7-4920-963a-20a87767a371" >
-		<http:request method="GET" doc:name="Request" doc:id="5226f07e-baa3-43d6-8fd5-555ed45183a1" config-ref="HTTP_Request_configuration" path="/users/{userId}">
+		<http:request method="GET" doc:name="Request" doc:id="5226f07e-baa3-43d6-8fd5-555ed45183a1" config-ref="HTTP_Request_configuration" path="/users/{userId}" responseTimeout="50000">
 			<http:headers ><![CDATA[#[output application/java
 ---
 {
@@ -84,7 +84,7 @@ output application/json
 		<logger level="INFO" doc:name="Logger" doc:id="6f9f360e-e6bb-480c-9e95-7e909a781fad" message="#[payload]"/>
 	</flow>
 	<flow name="trains-users-okta-api-deactivateUser" doc:id="2de0bc41-9cca-42d4-b511-72c36d537637" >
-		<http:request method="POST" doc:name="Request" doc:id="28c0499d-425c-415c-b931-7bec816260d8" config-ref="HTTP_Request_configuration" path="/users/{userId}/lifecycle/deactivate" >
+		<http:request method="POST" doc:name="Request" doc:id="28c0499d-425c-415c-b931-7bec816260d8" config-ref="HTTP_Request_configuration" path="/users/{userId}/lifecycle/deactivate" responseTimeout="50000">
 			<http:headers ><![CDATA[#[output application/java
 ---
 {
@@ -114,7 +114,7 @@ output application/json
 }]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
-		<http:request method="POST" doc:name="Request" doc:id="f40bccf1-595b-46ab-b8e0-ab147c53ce9c" config-ref="HTTP_Request_configuration" path="/users/{userId}/credentials/change_password" >
+		<http:request method="POST" doc:name="Request" doc:id="f40bccf1-595b-46ab-b8e0-ab147c53ce9c" config-ref="HTTP_Request_configuration" path="/users/{userId}/credentials/change_password" responseTimeout="50000">
 			<http:headers ><![CDATA[#[output application/java
 ---
 {
@@ -145,18 +145,23 @@ output application/json
 }]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
-		<http:request method="POST" doc:name="Request" doc:id="ea7c0d73-48b5-433d-9b83-36a8ca642085" config-ref="HTTP_Request_configuration" path="/authn" >
-		</http:request>
-		<logger level="INFO" doc:name="Logger" doc:id="ea3fcd88-234d-48b0-9f5e-29e59e55525e" message="#[payload]"/>
-	</flow>
-	<flow name="trains-users-okta-api-forgot-password" doc:id="94225c54-046c-4ca0-ab87-047fa1051c9c" >
-		<http:request method="POST" doc:name="Request" doc:id="25054823-09fa-4f8e-a765-badb3b91cb46" config-ref="HTTP_Request_configuration" path="/users/{userId}/credentials/forgot_password?sendEmail=false" >
+		<http:request method="POST" doc:name="Request" doc:id="ea7c0d73-48b5-433d-9b83-36a8ca642085" config-ref="HTTP_Request_configuration" path="/authn" responseTimeout="50000">
 			<http:headers ><![CDATA[#[output application/java
 ---
 {
 	"Authorization" : "SSWS 00a4GfGWlODf_340bPeho9ZCBw8rPBJhn_CaRSpful"
 }]]]></http:headers>
-			<http:uri-params ><![CDATA[#[output application/java
+		</http:request>
+		<logger level="INFO" doc:name="Logger" doc:id="ea3fcd88-234d-48b0-9f5e-29e59e55525e" message="#[payload]"/>
+	</flow>
+	<flow name="trains-users-okta-api-forgot-password" doc:id="94225c54-046c-4ca0-ab87-047fa1051c9c" >
+		<http:request method="POST" doc:name="Request" doc:id="25054823-09fa-4f8e-a765-badb3b91cb46" config-ref="HTTP_Request_configuration" path="/users/{userId}/credentials/forgot_password?sendEmail=false" responseTimeout="50000">
+			<http:headers><![CDATA[#[output application/java
+---
+{
+	"Authorization" : "SSWS 00a4GfGWlODf_340bPeho9ZCBw8rPBJhn_CaRSpful"
+}]]]></http:headers>
+			<http:uri-params><![CDATA[#[output application/java
 ---
 {
 	"userId" : message.attributes.uriParams.userId
