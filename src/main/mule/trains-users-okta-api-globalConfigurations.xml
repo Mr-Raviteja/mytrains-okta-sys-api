@@ -6,6 +6,264 @@
 http://www.mulesoft.org/schema/mule/json-logger http://www.mulesoft.org/schema/mule/json-logger/current/mule-json-logger.xsd
 http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
 	<configuration doc:name="Configuration" doc:id="a4ec9ef3-099f-487d-893c-203df3fb4717" defaultErrorHandler-ref="trains-users-okta-api-globalConfigurationsError_Handler" />
+	<error-handler name="trains-users-okta-api-globalConfigurationsError_Handler1" doc:id="d4c8f872-ec33-4774-b66c-525211b49b92" >
+		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="8e333f56-89d8-4a91-ac93-184f9c3e1cae" type="HTTP:BAD_GATEWAY">
+			<ee:transform doc:name="Copy_of_Transform Message" doc:id="54f7b26e-2434-4960-bdb3-50da6b2662e2" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+---
+{
+	error: error.errorType,
+	errorDesc: error.description
+}]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
+			<json-logger:logger doc:name="Copy_of_Logger" doc:id="79dd8a3c-b581-406e-8245-b129850c4908" config-ref="JSON_Logger_Config" message="#[payload]" />
+		</on-error-propagate>
+	</error-handler>
+	<error-handler name="trains-users-okta-api-globalConfigurationsError_Handler2" doc:id="ed59c8e8-1664-4287-bd89-7ea667a1464d" >
+		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="929e8846-74cf-4f82-bab0-71df6fcaa33c" type="HTTP:BAD_REQUEST">
+			<ee:transform doc:name="Copy_of_Transform Message" doc:id="b424ae06-2799-492c-9c12-ac6cf41953e2" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+---
+{
+	error: error.errorType,
+	errorDesc: error.description
+}]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
+			<json-logger:logger doc:name="Copy_of_Logger" doc:id="aa27c692-a9c8-4331-89df-6c8fd445946e" config-ref="JSON_Logger_Config" message="#[payload]" />
+		</on-error-propagate>
+	</error-handler>
+	<error-handler name="trains-users-okta-api-globalConfigurationsError_Handler3" doc:id="838c77e3-24eb-4253-b756-30cbce135e3f" >
+		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="75eee064-3b4f-4ebe-b8a3-b80e651ee499" type="HTTP:CLIENT_SECURITY">
+			<ee:transform doc:name="Copy_of_Transform Message" doc:id="fb435a93-864a-4384-b492-f9902cfecf20" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+---
+{
+	error: error.errorType,
+	errorDesc: error.description
+}]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
+			<json-logger:logger doc:name="Copy_of_Logger" doc:id="9e5bb1d4-323c-4c6e-b578-9899c0b6cf6e" config-ref="JSON_Logger_Config" message="#[payload]" />
+		</on-error-propagate>
+	</error-handler>
+	<error-handler name="trains-users-okta-api-globalConfigurationsError_Handler4" doc:id="e1ee3c57-28a2-41f3-add3-c2aaebd11310" >
+		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="e71f9c83-6016-4c92-925b-b68d830abde7" type="HTTP:CONNECTIVITY">
+			<ee:transform doc:name="Copy_of_Transform Message" doc:id="4a12540d-a025-466e-a0ac-6f3fc58d7607" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+---
+{
+	error: error.errorType,
+	errorDesc: error.description
+}]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
+			<json-logger:logger doc:name="Copy_of_Logger" doc:id="0379d646-96b7-4142-b457-e81ed8e318a8" config-ref="JSON_Logger_Config" message="#[payload]" />
+		</on-error-propagate>
+	</error-handler>
+	<error-handler name="trains-users-okta-api-globalConfigurationsError_Handler5" doc:id="0dd4efb3-b6a9-4311-b1ce-84aa6da92517" >
+		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="6c00560d-0c35-414a-a19b-6d9954f540c5" type="HTTP:FORBIDDEN">
+			<ee:transform doc:name="Copy_of_Transform Message" doc:id="b4f82a19-61d3-4507-b40d-4e83ce8d81bf" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+---
+{
+	error: error.errorType,
+	errorDesc: error.description
+}]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
+			<json-logger:logger doc:name="Copy_of_Logger" doc:id="5205c5e1-545c-46b7-9cba-87bdda2f4159" config-ref="JSON_Logger_Config" message="#[payload]" />
+		</on-error-propagate>
+	</error-handler>
+	<error-handler name="trains-users-okta-api-globalConfigurationsError_Handler6" doc:id="b7ec6f95-aff8-476c-9e9c-e63d2a3c457f" >
+		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="a02e487a-d36c-4f83-a523-81cbc386108a" type="HTTP:INTERNAL_SERVER_ERROR">
+			<ee:transform doc:name="Copy_of_Transform Message" doc:id="32a1ef42-c39a-4ba9-b0d5-ce84823721b8" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+---
+{
+	error: error.errorType,
+	errorDesc: error.description
+}]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
+			<json-logger:logger doc:name="Copy_of_Logger" doc:id="ae596d8c-1501-42b1-9e12-10f794118c01" config-ref="JSON_Logger_Config" message="#[payload]" />
+		</on-error-propagate>
+	</error-handler>
+	<error-handler name="trains-users-okta-api-globalConfigurationsError_Handler7" doc:id="efb21a36-fb45-4b51-accd-c1bb989b17af" >
+		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="88cbeadf-fa28-4239-a21d-5ba60825c469" type="HTTP:METHOD_NOT_ALLOWED">
+			<ee:transform doc:name="Copy_of_Transform Message" doc:id="568ac6b6-10e0-4ce2-ba23-e3e683ad2d9a" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+---
+{
+	error: error.errorType,
+	errorDesc: error.description
+}]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
+			<json-logger:logger doc:name="Copy_of_Logger" doc:id="c4dc376e-6d4f-4e0c-8c8b-30fb1e0b9ba1" config-ref="JSON_Logger_Config" message="#[payload]" />
+		</on-error-propagate>
+	</error-handler>
+	<error-handler name="trains-users-okta-api-globalConfigurationsError_Handler8" doc:id="4e433f09-4c94-4d70-969a-663d43584714" >
+		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="7384d8dd-7de0-4da9-9f7f-3ae49b653d93" type="HTTP:NOT_ACCEPTABLE">
+			<ee:transform doc:name="Copy_of_Copy_of_Transform Message" doc:id="1f7cb944-62be-4d2b-978e-32091a78d0fd">
+				<ee:message>
+					<ee:set-payload><![CDATA[%dw 2.0
+output application/java
+---
+{
+	error: error.errorType,
+	errorDesc: error.description
+}]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
+			<json-logger:logger doc:name="Copy_of_Logger" doc:id="7ae9ce75-c9d9-4443-95f1-de520d71440f" config-ref="JSON_Logger_Config" message="#[payload]" />
+		</on-error-propagate>
+	</error-handler>
+	<error-handler name="trains-users-okta-api-globalConfigurationsError_Handler9" doc:id="b0d8055f-77a4-4626-ba8b-370d55445b8f" >
+		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="dc274213-6acb-4de1-a796-7a59935c90ac" type="HTTP:NOT_FOUND, HTTP:PARSING">
+			<ee:transform doc:name="Copy_of_Copy_of_Transform Message" doc:id="20938cc4-a0fb-4a26-aa75-28d131be4ac4">
+				<ee:message>
+					<ee:set-payload><![CDATA[%dw 2.0
+output application/java
+---
+{
+	error: error.errorType,
+	errorDesc: error.description
+}]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
+			<json-logger:logger doc:name="Copy_of_Logger" doc:id="3c97838e-fbdd-4df6-8493-92f602edcecc" config-ref="JSON_Logger_Config" message="#[payload]" />
+		</on-error-propagate>
+	</error-handler>
+	<error-handler name="trains-users-okta-api-globalConfigurationsError_Handler10" doc:id="45cc5b5e-4d54-4c4b-9f60-da0f5e8c0ed3" >
+		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="62298a23-bff9-4656-8de8-a4bb2d81c144" type="HTTP:RETRY_EXHAUSTED">
+			<ee:transform doc:name="Copy_of_Transform Message" doc:id="04efabae-bf3b-4351-b1a4-eebc750370ad" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+---
+{
+	error: error.errorType,
+	errorDesc: error.description
+}]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
+			<json-logger:logger doc:name="Copy_of_Logger" doc:id="a4279bde-1103-4043-9813-e7627da241ec" config-ref="JSON_Logger_Config" message="#[payload]" />
+		</on-error-propagate>
+	</error-handler>
+	<error-handler name="trains-users-okta-api-globalConfigurationsError_Handler11" doc:id="f85cd697-2b1a-40d5-9f9b-c7ec2071cb3f" >
+		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="1e5caf7c-6080-431c-a095-3141442dc544" type="HTTP:SECURITY">
+			<ee:transform doc:name="Copy_of_Transform Message" doc:id="74fcb6cd-49d8-497c-a415-6729f4236d3a" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+---
+{
+	error: error.errorType,
+	errorDesc: error.description
+}]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
+			<json-logger:logger doc:name="Copy_of_Logger" doc:id="1102dcd9-2c44-4200-a44f-ffa41b2c0158" config-ref="JSON_Logger_Config" message="#[payload]" />
+		</on-error-propagate>
+	</error-handler>
+	<error-handler name="trains-users-okta-api-globalConfigurationsError_Handler12" doc:id="458f9e03-0376-4f84-acb3-52fb450dab0d" >
+		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="6be0bdc6-7c07-45cd-81be-3d5a623d5a21" type="HTTP:SERVICE_UNAVAILABLE">
+			<ee:transform doc:name="Copy_of_Transform Message" doc:id="2d4494e0-e015-4c0e-ab70-4c304662da59" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+---
+{
+	error: error.errorType,
+	errorDesc: error.description
+}]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
+			<json-logger:logger doc:name="Copy_of_Logger" doc:id="a97a1761-7ecb-41c6-a8b5-0485db3d5ff3" config-ref="JSON_Logger_Config" message="#[payload]" />
+		</on-error-propagate>
+	</error-handler>
+	<error-handler name="trains-users-okta-api-globalConfigurationsError_Handler13" doc:id="95b1244e-1327-4035-b7ce-ca1f6d914665" >
+		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="f4bd5c2f-3961-49e4-8995-7511468b454a" type="HTTP:TIMEOUT">
+			<ee:transform doc:name="Copy_of_Transform Message" doc:id="1f1bd3a7-df10-4646-b299-43a188749a10" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+---
+{
+	error: error.errorType,
+	errorDesc: error.description
+}]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
+			<json-logger:logger doc:name="Copy_of_Logger" doc:id="04431ebf-7f03-42d0-93fe-7efde547d688" config-ref="JSON_Logger_Config" message="#[payload]" />
+		</on-error-propagate>
+		
+	</error-handler>
+	<error-handler name="trains-users-okta-api-globalConfigurationsError_Handler14" doc:id="3ddbe499-d1a6-4487-b30d-ddf49c6fc068" >
+		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="2ddf3468-c287-4cfc-bf60-1fb5fbb81b6f" type="HTTP:TOO_MANY_REQUESTS">
+			<ee:transform doc:name="Copy_of_Transform Message" doc:id="49cae9da-486e-45e5-9e72-4d5242d423aa" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+---
+{
+	error: error.errorType,
+	errorDesc: error.description
+}]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
+			<json-logger:logger doc:name="Copy_of_Logger" doc:id="31d1123a-1ae2-42b7-a887-2b115a037a5e" config-ref="JSON_Logger_Config" message="#[payload]" />
+		</on-error-propagate>
+		
+	</error-handler>
+	<error-handler name="trains-users-okta-api-globalConfigurationsError_Handler15" doc:id="82b8b8d8-f53d-4731-99a2-0328ea1659eb" >
+		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="16d0f410-962b-4988-8362-41774308bd42" type="HTTP:UNAUTHORIZED">
+			<ee:transform doc:name="Copy_of_Transform Message" doc:id="abcf98d4-aa3d-4172-b852-e73e452c915d" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+---
+{
+	error: error.errorType,
+	errorDesc: error.description
+}]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
+			<json-logger:logger doc:name="Copy_of_Logger" doc:id="83ccf264-3e5f-4dae-b669-7e455bc46c56" config-ref="JSON_Logger_Config" message="#[payload]" />
+		</on-error-propagate>
+	</error-handler>
+	<error-handler name="trains-users-okta-api-globalConfigurationsError_Handler16" doc:id="0873dc17-f3e9-4975-be99-53e17c7e9d40" >
+		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="4999e9f7-ec78-434b-87b8-b64b554e4ab1" type="HTTP:UNSUPPORTED_MEDIA_TYPE">
+			<ee:transform doc:name="Copy_of_Transform Message" doc:id="746d405d-d2b1-449b-a1ac-e530df3b745e" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+---
+{
+	error: error.errorType,
+	errorDesc: error.description
+}]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
+			<json-logger:logger doc:name="Copy_of_Logger" doc:id="a0637c42-dc4e-4f4f-81da-dce1014b41fa" config-ref="JSON_Logger_Config" message="#[payload]" />
+		</on-error-propagate>
+	</error-handler>
 	<error-handler name="trains-users-okta-api-globalConfigurationsError_Handler" doc:id="edf68636-d8fe-44bb-a646-708829ec9715" >
 		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="6453a7a8-4c00-4ef4-b2aa-17e9ac0fde4c" >
 			<ee:transform doc:name="Transform Message" doc:id="1a31e119-bf78-4e27-9715-ebefd7dbd159">
