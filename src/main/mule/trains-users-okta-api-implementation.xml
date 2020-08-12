@@ -31,14 +31,15 @@ output application/json
 }]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
-		<http:request method="POST" doc:name="Request" doc:id="20a4231a-2f62-46a3-a26e-0af6796e2cee" config-ref="HTTP_Request_configuration" path="/users?activate=true" responseTimeout="50000">
+		<json-logger:logger doc:name="Logger" doc:id="63206e0e-a8f6-4526-80df-b7672b6ec33a" config-ref="JSON_Logger_Config" message="#['JSON Logger']"/>
+		<http:request method="POST" doc:name="Request" doc:id="e574c3a5-5d5d-40fb-99e9-e6b6c52538c4" config-ref="HTTP_Request_configuration" path="/users?activate=true" responseTimeout="50000">
 			<http:headers ><![CDATA[#[output application/java
 ---
 {
-	"Authorization" : "SSWS 00a4GfGWlODf_340bPeho9ZCBw8rPBJhn_CaRSpful"
+	"Authorization" : "SSWS 00GpM49ppgDzqQrgYM6_N7KBKb16sv9jayNmGas_vg"
 }]]]></http:headers>
 		</http:request>
-		<json-logger:logger doc:name="Logger" doc:id="9202f80e-d6b3-4063-b4ce-413e4190fb8e" config-ref="JSON_Logger_Config" message="#[payload]"/>
+		<json-logger:logger doc:name="Logger" doc:id="9202f80e-d6b3-4063-b4ce-413e4190fb8e" config-ref="JSON_Logger_Config" message="#['JSON logger']" tracePoint="AFTER_REQUEST"/>
 	</flow>
 	<flow name="trains-users-okta-api-getAllUsers" doc:id="0a86934c-0e95-40be-9b35-4491cbe463fe" >
 		<http:request method="GET" doc:name="Request" doc:id="ce24ed1e-b1f5-4585-8d33-34c58ad3095a" config-ref="HTTP_Request_configuration" path="/users" responseTimeout="50000">
@@ -48,7 +49,7 @@ output application/json
 	"Authorization" : "SSWS 00a4GfGWlODf_340bPeho9ZCBw8rPBJhn_CaRSpful"
 }]]]></http:headers>
 		</http:request>
-		<json-logger:logger doc:name="Logger" doc:id="b6619e4c-c5ab-4aa4-82c3-92ad44853cf2" config-ref="JSON_Logger_Config" message="#[payload]" />
+		<json-logger:logger doc:name="Logger" doc:id="b6619e4c-c5ab-4aa4-82c3-92ad44853cf2" config-ref="JSON_Logger_Config" message="#['JSON Logger']" tracePoint="AFTER_REQUEST"/>
 	</flow>
 	<flow name="trains-users-okta-api-activateUser" doc:id="8153e05b-4797-45dc-be5e-b33660b28cbf" >
 		<http:request method="POST" doc:name="Request" doc:id="61703922-6ff2-40b9-b122-760c36cc249e" config-ref="HTTP_Request_configuration" path="/users/{userId}/lifecycle/activate" responseTimeout="50000">
@@ -68,7 +69,7 @@ output application/json
 	"sendEmail" : "false"
 }]]]></http:query-params>
 		</http:request>
-		<json-logger:logger doc:name="Logger" doc:id="8f433095-8a1e-4642-a5ba-a5a3c4aae93f" config-ref="JSON_Logger_Config" message="#[payload]" />
+		<json-logger:logger doc:name="Logger" doc:id="8f433095-8a1e-4642-a5ba-a5a3c4aae93f" config-ref="JSON_Logger_Config" message="#['JSON Logger']" />
 	</flow>
 	<flow name="trains-users-okta-api-getUser" doc:id="96caebcf-75a7-4920-963a-20a87767a371" >
 		<http:request method="GET" doc:name="Request" doc:id="5226f07e-baa3-43d6-8fd5-555ed45183a1" config-ref="HTTP_Request_configuration" path="/users/{userId}" responseTimeout="50000">
@@ -83,7 +84,7 @@ output application/json
 	"userId" : message.attributes.uriParams.userId
 }]]]></http:uri-params>
 		</http:request>
-		<json-logger:logger doc:name="Logger" doc:id="d124a799-6ea8-4ac0-a3f2-7a9b1c5d3926" config-ref="JSON_Logger_Config" message="#[payload]" />
+		<json-logger:logger doc:name="Logger" doc:id="d124a799-6ea8-4ac0-a3f2-7a9b1c5d3926" config-ref="JSON_Logger_Config" message="#['JSON Logger']" />
 	</flow>
 	<flow name="trains-users-okta-api-deactivateUser" doc:id="2de0bc41-9cca-42d4-b511-72c36d537637" >
 		<http:request method="POST" doc:name="Request" doc:id="28c0499d-425c-415c-b931-7bec816260d8" config-ref="HTTP_Request_configuration" path="/users/{userId}/lifecycle/deactivate" responseTimeout="50000">
@@ -98,7 +99,7 @@ output application/json
 	"userId" : message.attributes.uriParams.userId
 }]]]></http:uri-params>
 		</http:request>
-		<json-logger:logger doc:name="Logger" doc:id="8a159eee-5ebf-4af1-b1ff-9c09199da1cd" config-ref="JSON_Logger_Config" message="#[payload]" />
+		<json-logger:logger doc:name="Logger" doc:id="8a159eee-5ebf-4af1-b1ff-9c09199da1cd" config-ref="JSON_Logger_Config" message="#['JSON Logger']" />
 	</flow>
 	<flow name="trains-users-okta-api-changePassword" doc:id="37b7ef41-6079-4578-bf49-c1ff3a66304c" >
 		<ee:transform doc:name="Transform Message" doc:id="af366aec-793a-4651-ba3f-0881408c3d61" >
@@ -128,7 +129,7 @@ output application/json
 	"userId" : message.attributes.uriParams.userId
 }]]]></http:uri-params>
 		</http:request>
-		<json-logger:logger doc:name="Logger" doc:id="0ca06f30-39a7-44dc-be00-a64b4b81bfa1" config-ref="JSON_Logger_Config" message="#[payload]" />
+		<json-logger:logger doc:name="Logger" doc:id="0ca06f30-39a7-44dc-be00-a64b4b81bfa1" config-ref="JSON_Logger_Config" message="#['JSON Logger']" />
 	</flow>
 	<flow name="trains-users-okta-api-authenticateUser" doc:id="00e85d24-275b-4a5c-bc2b-ea41942d3997" >
 		<ee:transform doc:name="Transform Message" doc:id="29c77a98-5e6a-4e94-8742-2d29d4c54a74" >
@@ -154,7 +155,7 @@ output application/json
 	"Authorization" : "SSWS 00a4GfGWlODf_340bPeho9ZCBw8rPBJhn_CaRSpful"
 }]]]></http:headers>
 		</http:request>
-		<json-logger:logger doc:name="Logger" doc:id="139bad93-9897-4194-9c9e-77da17a0bdff" config-ref="JSON_Logger_Config" message="#[payload]" />
+		<json-logger:logger doc:name="Logger" doc:id="139bad93-9897-4194-9c9e-77da17a0bdff" config-ref="JSON_Logger_Config" message="#['JSON Logger']" />
 	</flow>
 	<flow name="trains-users-okta-api-forgot-password" doc:id="94225c54-046c-4ca0-ab87-047fa1051c9c" >
 		<http:request method="POST" doc:name="Request" doc:id="25054823-09fa-4f8e-a765-badb3b91cb46" config-ref="HTTP_Request_configuration" path="/users/{userId}/credentials/forgot_password?sendEmail=false" responseTimeout="50000">
@@ -169,6 +170,6 @@ output application/json
 	"userId" : message.attributes.uriParams.userId
 }]]]></http:uri-params>
 		</http:request>
-		<json-logger:logger doc:name="Logger" doc:id="bdaf09ac-73cb-46a6-b211-5b08d4cba916" config-ref="JSON_Logger_Config" message="#[payload]" />
+		<json-logger:logger doc:name="Logger" doc:id="bdaf09ac-73cb-46a6-b211-5b08d4cba916" config-ref="JSON_Logger_Config" message="#['JSON Logger']" />
 	</flow>
 </mule>
